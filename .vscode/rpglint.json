@@ -1,0 +1,16 @@
+{
+  "indent": 4,
+  "PrototypeCheck": false,
+  "NoOCCURS": true,
+  "NoCTDATA": true,
+  "NoGlobalSubroutines": true,
+  "NoUnreferenced": true,
+  "NoSELECTAll": true,
+  "UselessOperationCheck": true,
+  "RequiresParameter": true,
+  "UppercaseConstants": true,
+  "IncorrectVariableCase": true,
+  "StringLiteralDupe": false,
+  "NoSQLJoins": false,
+  "PrettyComments": false
+}
