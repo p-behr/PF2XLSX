@@ -139,20 +139,17 @@ end-proc test_createFiles;
 
 
 // =============================================================================
-// dcl-proc test_clearTempFolder export;
+dcl-proc test_clearTempFolder export;
 
-//     dcl-s fd int(10);
-//     dcl-s openFlags int(10);
-//     dcl-s modeFlags int(10);
-//     dcl-s codePage uns(10);
+    dcl-c FOLDER_NOT_EXISTS -1;
+    dcl-s folderCheck int(10);
 
-//     P2X_createPath('/home/rpgunit/pf2xlsx/testfile.xlsx');
-//     P2X_createFiles('/home/rpgunit/pf2xlsx/testfile.xlsx');
-//     P2X_clearTempFolder('/home/rpgunit/pf2xlsx/testfile.xlsx');
+    P2X_createPath('/home/rpgunit/pf2xlsx/testfile.xlsx');
+    P2X_createFiles('/home/rpgunit/pf2xlsx/testfile.xlsx');
+    P2X_clearTempFolder('/home/rpgunit/pf2xlsx/testfile.xlsx');
 
-//     folderCheck = access('/home/rpgunit/pf2xlsx/' : F_OK);
-//     iEqual(FOLDER_EXISTS : folderCheck : 'Path folders');
+    folderCheck = access('/home/rpgunit/pf2xlsx/pf2xlsx_temp' : F_OK);
+    iEqual(FOLDER_NOT_EXISTS : folderCheck : 'Path folders');
 
-//     return;
-// end-proc test_clearTempFolder;
-
+    return;
+end-proc test_clearTempFolder;

@@ -103,6 +103,9 @@ dcl-proc  P2X_clearTempFolder  export;
 
     unlink('[Content_Types].xml');
 
+    chdir(%trim(path));
+    rmdir('pf2xlsx_temp');
+
     return;
 end-proc  P2X_clearTempFolder;
 
