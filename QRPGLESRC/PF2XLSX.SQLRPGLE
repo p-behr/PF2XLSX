@@ -22,7 +22,7 @@ end-ds;
 //------------------------------------------------------------------------------
 dcl-proc  P2X_main;
     dcl-pi *n extpgm('PF2XLSX');
-        in_libFile varchar(21) const;
+        in_libFile char(21) const;
         in_fullPath char(5000) const;
     end-pi;
 
@@ -928,7 +928,7 @@ end-proc  P2X_parsePath;
 //------------------------------------------------------------------------------
 dcl-proc  P2X_parseLibFile;
     dcl-pi  *n;
-        in_libFile varchar(21) const;
+        in_libFile char(21) const;
         out_lib char(10);
         out_file char(10);
     end-pi;
