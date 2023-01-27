@@ -1,6 +1,6 @@
 **free
 
-ctl-opt dftactgrp(*no) actgrp('PBTEST');
+ctl-opt dftactgrp(*no) actgrp('PF2XLSX');
 ctl-opt option(*nodebugio : *srcstmt);
 ctl-opt main(P2X_main);
 
