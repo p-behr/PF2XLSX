@@ -789,6 +789,10 @@ dcl-proc  P2X_loadPfData;
         P2X_write(fd: '<row r="' + %char(curRow) + '">');
     endsr;
 
+    on-exit;
+        Exec SQL CLOSE sql_cursor;
+        Exec SQL DEALLOCATE DESCRIPTOR 'mydescr';
+
 end-proc  P2X_loadPfData;
 
 
