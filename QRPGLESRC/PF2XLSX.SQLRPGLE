@@ -1174,19 +1174,25 @@ end-proc  P2X_write;
 
 // =============================================================================
 // P2X_fixNumber
-//  Fixes packed or zoned data to the correct number of decimal places
+//  Fixes packed or zoned data to show the correct number of decimal 
+//  places and to ensure we always have a leading zero.
 // =============================================================================
 dcl-proc  P2X_fixNumber;
-    dcl-pi *n varchar(50);
+    dcl-pi *n varchar(52);
         number  packed(50 : 20) const;
         scale   int(5) const;
     end-pi;
 
-    dcl-s  rtnVal varchar(50);
+    dcl-s  numberChar  char(52);
+    dcl-s  rtnVal varchar(52);
+    dcl-s  decimalPoint  uns(3);
 
-    rtnVal = %char(number);
-    rtnVal = %subst(rtnVal : 1 : %scan('.' :rtnVal) + scale);
+    rtnVal = %char(%int(number));
+    if scale > 0;
+        numberChar = %char(number);
+        decimalPoint = %check('-0123456789' : numberChar);
+        rtnVal += %subst(numberChar : decimalPoint : scale + 1);
+    endif;
 
     return  rtnVal;
 end-proc  P2X_fixNumber;
-
