@@ -689,7 +689,7 @@ dcl-proc  P2X_loadPfData;
                   GET DESCRIPTOR 'mydescr' VALUE :curCol
                                 :charData = DATA;
                 charData = %scanrpl('"' : '&quot;' : charData);
-                P2X_write(fd: ' t="inlineStr"><is><t>');
+                P2X_write(fd: ' t="inlineStr"><is><t xml:space="preserve">');
                 P2X_write(fd: %trimr(charData));
                 P2X_write(fd: '</t></is></c>');
                 iter;
@@ -701,7 +701,7 @@ dcl-proc  P2X_loadPfData;
                 GET DESCRIPTOR 'mydescr' VALUE :curCol
                     :varcharData = DATA;
                 varcharData = %scanrpl('"' : '&quot;' : varcharData);
-                P2X_write(fd: ' t="inlineStr"><is><t>');
+                P2X_write(fd: ' t="inlineStr"><is><t xml:space="preserve">');
                 P2X_write(fd: %trimr(varcharData));
                 P2X_write(fd: '</t></is></c>');
                 iter;
