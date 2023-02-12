@@ -688,6 +688,7 @@ dcl-proc  P2X_loadPfData;
                 Exec SQL
                   GET DESCRIPTOR 'mydescr' VALUE :curCol
                                 :charData = DATA;
+                charData = %scanrpl('"' : '&quot;' : charData);
                 P2X_write(fd: ' t="inlineStr"><is><t>');
                 P2X_write(fd: %trimr(charData));
                 P2X_write(fd: '</t></is></c>');
@@ -699,6 +700,7 @@ dcl-proc  P2X_loadPfData;
                 Exec SQL
                 GET DESCRIPTOR 'mydescr' VALUE :curCol
                     :varcharData = DATA;
+                varcharData = %scanrpl('"' : '&quot;' : varcharData);
                 P2X_write(fd: ' t="inlineStr"><is><t>');
                 P2X_write(fd: %trimr(varcharData));
                 P2X_write(fd: '</t></is></c>');
