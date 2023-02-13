@@ -688,7 +688,7 @@ dcl-proc  P2X_loadPfData;
                 Exec SQL
                   GET DESCRIPTOR 'mydescr' VALUE :curCol
                                 :charData = DATA;
-                charData = %scanrpl('"' : '&quot;' : charData);
+                charData = P2X_xmlEntities(charData);
                 P2X_write(fd: ' t="inlineStr"><is><t xml:space="preserve">');
                 P2X_write(fd: %trimr(charData));
                 P2X_write(fd: '</t></is></c>');
@@ -700,7 +700,7 @@ dcl-proc  P2X_loadPfData;
                 Exec SQL
                 GET DESCRIPTOR 'mydescr' VALUE :curCol
                     :varcharData = DATA;
-                varcharData = %scanrpl('"' : '&quot;' : varcharData);
+                varcharData = P2X_xmlEntities(varcharData);
                 P2X_write(fd: ' t="inlineStr"><is><t xml:space="preserve">');
                 P2X_write(fd: %trimr(varcharData));
                 P2X_write(fd: '</t></is></c>');
@@ -1198,3 +1198,36 @@ dcl-proc  P2X_fixNumber;
 
     return  rtnVal;
 end-proc  P2X_fixNumber;
+
+
+
+// =============================================================================
+// P2X_xmlEntities
+//  Replace illegal characters with XML entity code.
+// =============================================================================
+dcl-proc  P2X_xmlEntities;
+    dcl-pi *n char(32765);
+        charData char(32765) const;
+    end-pi;
+
+    dcl-s  rtnVal char(32765);
+    dcl-c  QUOTE '"';
+    dcl-c  QUOTE_ENTITY '&quot;'; 
+    dcl-c  APOS '''';
+    dcl-c  APOS_ENTITY '&apos;';
+    dcl-c  AMP '&';
+    dcl-c  AMP_ENTITY '&amp;';
+    dcl-c  LT '<';
+    dcl-c  LT_ENTITY '&lt;';
+    dcl-c  GT '>';
+    dcl-c  GT_ENTITY '&gt;';
+
+    rtnVal = charData;
+    // Be sure to replace & first
+    rtnVal = %scanrpl(AMP : AMP_ENTITY : rtnVal);
+    rtnVal = %scanrpl(QUOTE : QUOTE_ENTITY : rtnVal);
+    rtnVal = %scanrpl(APOS : APOS_ENTITY : rtnVal);
+    rtnVal = %scanrpl(LT : LT_ENTITY : rtnVal);
+    rtnVal = %scanrpl(GT : GT_ENTITY : rtnVal);
+    return  rtnVal;
+end-proc  P2X_xmlEntities;
